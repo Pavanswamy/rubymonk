@@ -1,0 +1,1 @@
+"ThiS iS A vErY ComPlEx SenTeNcE".swapcase
