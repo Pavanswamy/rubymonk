@@ -1,0 +1,27 @@
+<h3>Time Entry </h3>
+<div>
+  <span>Projects:</span>
+	<%= collection_select "project","id", @projects, :id, :name, include_blank: "--Select Project--" %>
+</div>
+
+<br>
+<div id="week_number">
+	
+</div>
+
+
+<script>
+  $("#project_id").change(function() {
+    var project_id = $(this).val();
+    $.ajax({
+    	url: "/show_weeks",
+    	data: {id: project_id},
+    	type: 'get',
+    	dataType: "html",
+    	success: function(returnData){
+    		$("#week_number").html(returnData);
+    	}
+    })
+
+  })
+</script>

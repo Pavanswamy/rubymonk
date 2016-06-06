@@ -1,0 +1,36 @@
+<%= form_tag show_users_time_sheets_path, method: :get, id: "show_users_time_sheets" do %>
+<h3>Users Time Entries </h3>
+<div>
+  <span>Projects:</span>
+	<%= collection_select "project", "id", @projects, :id, :name, prompt: params[:project].blank? ? true : Project.find_by(id: params[:project][:id]).try(:name) %>
+</div>
+<br>
+<div id="show_users">
+  <span>Members:</span>
+  <%= collection_select "member", "id", @users, :id, :email, prompt: params[:member].blank? ? true : User.find_by(id: params[:member][:id]).try(:email) %>
+</div>
+<br>
+<div>
+  <button type="button" class="btn btn-success" id="time_sheets">Submit</button>
+</div>
+<% end %>
+
+<script>
+  $("#project_id").change(function() {
+    var project_id = $(this).val();
+    $.ajax({
+    	url: "/show_project_members",
+    	data: {project_id: project_id},
+    	type: 'get',
+    	dataType: "html",
+    	success: function(returnData){
+    		$("#show_users").html(returnData);
+    	}
+    })
+
+  })
+
+  $("#time_sheets").click(function() {
+    $("#show_users_time_sheets").submit();
+  })
+</script>
