@@ -1,0 +1,4 @@
+<div id="show_users" style="margin-left: -17px;">
+  <span>Members:</span>
+  <%= collection_select "member","id", @users, :id, :email, include_blank: "--Select Member--" %>
+</div>

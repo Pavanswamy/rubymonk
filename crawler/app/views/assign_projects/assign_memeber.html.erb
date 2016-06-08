@@ -1,0 +1,14 @@
+<h3>Assign Members To Project</h3>
+<%= form_for @project_member, url: create_project_members_path(id: @project.id), method: 'post' do |f| %>
+<% @users.each do |user| %>
+<div class="row col-sm-12">
+   <div class="col-sm-3">
+     <%= user.email %>
+   </div>
+   <div class="col-sm-2">
+     <%= check_box_tag "member[]", user.id, @members.include?(user.id) %>
+   </div>
+</div>
+<% end %>
+  <%= f.submit "Assign Members" %>
+<% end %>
